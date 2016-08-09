@@ -3,9 +3,11 @@ package com.example.travis.a3dmodeller;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
+import com.example.travis.a3dmodeller.objects.Cube;
 import com.example.travis.a3dmodeller.objects.IsoSphere;
 import com.example.travis.a3dmodeller.objects.Plane;
 import com.example.travis.a3dmodeller.programs.ColorShaderProgram;
+import com.example.travis.a3dmodeller.util.Geometry;
 import com.example.travis.a3dmodeller.util.MatrixHelper;
 
 import static android.opengl.GLES20.*;
@@ -32,6 +34,7 @@ public class ModellerRenderer implements GLSurfaceView.Renderer {
 
     private Plane plane;
     private IsoSphere sphere;
+    private Cube cube;
 
     public ModellerRenderer(Context context) {
         this.context = context;
@@ -43,9 +46,10 @@ public class ModellerRenderer implements GLSurfaceView.Renderer {
         glClearColor(0.0f, 0.1f, 0.1f, 1.0f);
 
         colorProgram = new ColorShaderProgram(context);
+        plane = new Plane(new Geometry.Point(0, 0, 0), 1.0f, 1.0f);
 
-        plane = new Plane();
         sphere = new IsoSphere();
+        cube = new Cube(new Geometry.Point(0, 0, 0), 1.0f);
     }
 
     @Override
@@ -71,10 +75,12 @@ public class ModellerRenderer implements GLSurfaceView.Renderer {
 
         positionPlaneInScene();
         colorProgram.useProgram();
-        colorProgram.setUniforms(modelViewProjectionMatrix, 1f, 0f, 0f);
-        sphere.bindData(colorProgram);
+//        colorProgram.setUniforms(modelViewProjectionMatrix, 1f, 0f, 0f);
+//
+//        sphere.bindData(colorProgram);
+//        sphere.draw();
 
-        sphere.draw();
+
 
         colorProgram.setUniforms(modelViewProjectionMatrix, 1f, 1f, 0.7f);
         plane.bindData(colorProgram);

@@ -48,7 +48,7 @@ public class Plane {
     }
 
     public void draw() {
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 12);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, NUM_VERTICES * FLOATS_PER_VERTEX);
     }
 
 }
